@@ -19,4 +19,16 @@ export default function () {
       Tasks.update(_id, {$set: {isDone: checked} } );
     }
   });
+
+  Meteor.methods({
+    'tasks.new'(description) {
+      check(description, String);
+
+      Tasks.insert({
+        description: description,
+        createdAt: new Date(),
+        isDone: false
+      });
+    }
+  });
 }
